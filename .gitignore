@@ -1,0 +1,29 @@
+/*
+
+# GIT
+!.gitignore
+!README.md
+!LICENSE
+!.github/
+!.github/*
+
+
+# NIX
+!default.nix
+!.envrc
+
+# TOOLS
+!Makefile
+!CMakeLists.txt
+!gcc-arm-none-eabi.cmake
+!.clang-format
+!*.ld
+cmake/
+
+# BASE
+!Core
+!Drivers
+!CubeMX
+!Project
+!rings-beamformer.ioc
+!.mxproject
