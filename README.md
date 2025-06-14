@@ -1,15 +1,14 @@
 # STM32U575 USB-to-SPI Bridge for AWMF-0165
 
-This project implements a simple USB-to-SPI bridge on the STM32U575 using CDC class USB and SPI communication. It’s designed to control the **Analog Devices AWMF-0165 beamforming IC** over SPI.
+The STM32U575 acts as a bridge between the computer and the AWMF-0165 beamforming chip. It receives the USB data from the computer and sends instrutions to the AWMF-01665 chip using SPI commands.
 
 ---
 
 ## Features
 
-- USB CDC interface receives 2-byte commands from PC
-- Converts them to SPI writes to the AWMF-0165
-- Echoes response back over USB (optional)
-- Handles SPI and USB initialization via STM32 HAL
+- PC can caommunicate with SPI device using USB
+- Uses AWMF-0165 chip
+- Settings through STM32CubeMax
 
 ---
 
@@ -18,28 +17,26 @@ This project implements a simple USB-to-SPI bridge on the STM32U575 using CDC cl
 - STM32U575 Nucleo or custom board
 - AWMF-0165 beamformer IC
 - USB connection to host PC
-- SPI lines: SCK, MOSI, and software-controlled CS (PA4)
-
----
-
-## Notes
-
-- SPI polarity/phase configured for AWMF compatibility
-- Code assumes CDC_Receive_FS is used as USB callback
-- SPI BaudRatePrescaler set to 16 (adjust as needed)
 
 ---
 
 ## To Use
 
-- Build in STM32CubeIDE
-- Connect via USB
-- Send 2-byte SPI commands over virtual COM port
+- Open Project through STM32CubeIDE
+- Build and Flash STM32 board
+- Connect PC to USB
+- Open terminal to send message
 
 ---
 
 ## Files
 
-- `main.c` – All code in one file for portability
+- `Core/` – Main C code 
+- 'Drivers/ - STM32 and USB libraries
+- 'usb_spi_bridge.c' - USB to SPI bridge code
+- 'rings-beamformer.ioc' - STM32CubeMX project file
+- 'CMakeLists.txt' - CMake build file
+- `STM32U575xx_FLASH.ld` - Flash Memory Script
+- `STM32U575xx_RAM.ld` - RAM Memory SCript
 
 ---
