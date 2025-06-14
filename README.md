@@ -6,7 +6,7 @@ The STM32U575 acts as a bridge between the computer and the AWMF-0165 beamformin
 
 ## Features
 
-- PC can caommunicate with SPI device using USB
+- PC can communicate with SPI device using USB
 - Uses AWMF-0165 chip
 - Settings through STM32CubeMax
 
