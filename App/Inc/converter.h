@@ -25,12 +25,12 @@ typedef struct {
 } target_info_t; // TargetInfo
 
 typedef struct {
-  uint8_t lo_phase;
-  uint8_t if_phase;
-  uint8_t tx_gain;
+  uint8_t lo_phase_tx; // local oscillator
+  uint8_t if_phase_tx; // intermediate frequency
+  uint8_t gain_tx;     // tx gain
   uint8_t lo_phase_rx;
   uint8_t if_phase_rx;
-  uint8_t rx_gain;
+  uint8_t gain_rx;
 } phase_settings_t; // PhaseSettings
 
 void awmf210_write(uint16_t reg_addr, uint64_t data);
