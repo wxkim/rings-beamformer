@@ -10,17 +10,17 @@
 // #include "usb_device.h"
 
 
-hspi1.Init.DataSize = SPI_DATASIZE_15BIT;
-HAL_SPI_Init(&hspi1);
-
+// We declare explicit command codes matching a packer
 typedef enum
 {
-BF_CMD_S
+    BF_CMD_REG_WR = 0x0, //normal register write
+    BF_CMD_BROADCAST_WR = 0x2 //broadcast write
 } bf_cmd_t;
+
 
 //60-bit serial register frame
 typedef struct{
-    bf_cmd_t;
+    bf_cmd_t cmd; // command type
     uint16_t addr10;
     uint64_t data48;
 } bf_register_frame_t;
@@ -34,7 +34,6 @@ typedef struct{
 
 //34-bit fast-beam frame
 typedef struct{
-    bf_cmd_t;
     uint8_t tdbs_addr_B;
     uint8_t tdbs_addr_A;
     uint16_t fbs_addr_B;
@@ -44,17 +43,16 @@ typedef struct{
 
 // build 60-bit register frame from uint_64
 
-uint64_t BF_Pack60(const bf_register_frame_t *f);
+void BF_Pack60(const bf_register_frame_t *f);
 
 // split 60-bit into 4x15 word chunks
-uint64_t BF_Pack60_to4x15(const bf_register_frame_t *f, uint16_t out[4]);
+void BF_Pack60_to4x15(const bf_register_frame_t *f, uint16_t out[4]);
 
      // build 62-bit broadcast frame from uint_64
-uint64_t
-BF_Pack62(const bf_broadcast_frame_t *f);
+void BF_Pack62(const bf_broadcast_frame_t *f);
 
 // split 34-bit into 4x15 word chunks
-uint64_t BF_Pack34 (const bf_fastbeam_frame_t *f, uint8_t out[5]);
+void BF_Pack34 (const bf_fastbeam_frame_t *f, uint8_t out[5]);
 
 
 //Transmit into register
