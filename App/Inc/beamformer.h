@@ -5,29 +5,69 @@
 #include "main.h"
 #include "spi.h"
 #include <stdint.h>
+#include "stm32u5xx_hal.h"
+
 // #include "usb_device.h"
 
-typedef enum {
-    COMMAND_SERIAL_RDWR,
-    COMMAND_SERIAL_RDWR_CHAIN,
-    COMMAND_HYBRID_RDWR_CHAIN,
-    COMMAND_BROADCAST_WR,
-    COMMAND_RX_BEAMSTEERING,
-    COMMAND_TX_BEAMSTEERING,
-} beamformer_command_type;
 
-typedef struct {
-    uint8_t parity:1;
-    uint8_t buffered_write:1; // 1 = buffered write, 0 = immediate write
-    uint8_t reg_addr:7;
-    uint64_t data:48;
-    uint8_t TDBS_addr_A:6;
-    uint8_t TDBS_addr_B:6;
-    uint16_t FBS_addr_A:9;
-    uint16_t FBS_addr_B:9;
-    beamformer_command_type command_type;
-} beamformer_command_cfg_t;
+// We declare explicit command codes matching a packer
+typedef enum
+{
+    BF_CMD_REG_WR = 0x0, //normal register write
+    BF_CMD_BROADCAST_WR = 0x2 //broadcast write
+} bf_cmd_t;
 
-void pack_command(beamformer_command_cfg_t *config);
+
+//60-bit serial register frame
+typedef struct{
+    bf_cmd_t cmd; // command type
+    uint16_t addr10;
+    uint64_t data48;
+} bf_register_frame_t;
+
+//62-bit broadcast frame - write to all IC's
+typedef struct{
+    uint16_t addr10;
+    uint64_t data48;
+} bf_broadcast_frame_t;
+
+
+//34-bit fast-beam frame
+typedef struct{
+    uint8_t tdbs_addr_B;
+    uint8_t tdbs_addr_A;
+    uint16_t fbs_addr_B;
+    uint16_t fbs_addr_A;
+    uint8_t is_tx_bank; //0 is RX(1110), 1 = TX (1111)
+} bf_fastbeam_frame_t;
+
+// build 60-bit register frame from uint_64
+
+void BF_Pack60(const bf_register_frame_t *f);
+
+// split 60-bit into 4x15 word chunks
+void BF_Pack60_to4x15(const bf_register_frame_t *f, uint16_t out[4]);
+
+     // build 62-bit broadcast frame from uint_64
+void BF_Pack62(const bf_broadcast_frame_t *f);
+
+// split 34-bit into 4x15 word chunks
+void BF_Pack34 (const bf_fastbeam_frame_t *f, uint8_t out[5]);
+
+
+//Transmit into register
+
+//send one 60-bit register frame
+HAL_StatusTypeDef BF_Send60(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_register_frame_t *f);
+
+//send one 62-bit broadcast frame
+HAL_StatusTypeDef BF_Send62_Broadcast(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_broadcast_frame_t *f);
+
+//Send N-chained 60-bit register frames
+HAL_StatusTypeDef BF_Send60_Chain(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_register_frame_t *f, uint16_t N);
+
+//send one 34-bit fast-beam frame
+HAL_StatusTypeDef BF_Send34_FastBeam(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_fastbeam_frame_t *f);
+
 
 #endif // BEAMFORMER_H
