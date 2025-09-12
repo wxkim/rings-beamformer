@@ -9,7 +9,7 @@ uint64_t BF_Pack60(const bf_register_frame_t *f)
 {
     uint8_t ctrl = (f->cmd == BF_CMD_BROADCAST_WR) ? 0b10 : 0b00; //00 = reg write, 10 = broadcast write
     uint64_t addr = (uint64_t)(f->addr10 & 0x03FFu); //10 bits
-    uint64_t data = (uint_64_t)(f->data48 & 0xFFFFFFFFFFFFull); //48 bits
+    uint64_t data = (uint64_t)(f->data48 & 0xFFFFFFFFFFFFull); //48 bits
 
     uint64_t word = 0;
     word |= ((uint64_t)ctrl << 58); //ctrl -> bits [59:58]
@@ -23,7 +23,7 @@ uint64_t BF_Pack62(const bf_broadcast_frame_t *f)
 {
     uint8_t ctrl = 0b10; //broadcast write
     uint64_t addr = (uint64_t)(f->addr10 & 0x03FFu); //10 bits
-    uint64_t data = (uint_64_t)(f->data48 & 0xFFFFFFFFFFFFull); //48 bits
+    uint64_t data = (uint64_t)(f->data48 & 0xFFFFFFFFFFFFull); //48 bits
 
     uint64_t word = 0;
     word |= (1ull << 61); // Leading 1 at bit 61
