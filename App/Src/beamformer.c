@@ -1,12 +1,23 @@
+#include "stm32u5xx_hal.h"
+#include "stm32u5xx_hal.h"
+#include "stm32u5xx_hal_spi.h"
+#include "stm32u5xx_hal_gpio.h"
 #include "beamformer.h"
+#include "stm32u5xx_hal_def.h" // Add this line to define HAL_StatusTypeDef
+
+
 #include <stdint.h>
 
+// Declare SPI handle
 
 
 //60-bit packer
+//hspi1.init.DataSize = SPI_DATASIZE_15BIT;
 
-uint64_t BF_Pack60(const bf_register_frame_t *f)
-{
+uint64_t BF_Pack60(const bf_register_frame_t *f) {
+  
+  
+
     uint8_t ctrl = (f->cmd == BF_CMD_BROADCAST_WR) ? 0b10 : 0b00; //00 = reg write, 10 = broadcast write
     uint64_t addr = (uint64_t)(f->addr10 & 0x03FFu); //10 bits
     uint64_t data = (uint64_t)(f->data48 & 0xFFFFFFFFFFFFull); //48 bits
@@ -27,7 +38,7 @@ uint64_t BF_Pack62(const bf_broadcast_frame_t *f)
 
     uint64_t word = 0;
     word |= (1ull << 61); // Leading 1 at bit 61
-    word != (addr << 51); // ADDR in bits [60:51]
+    word |= (addr << 51); // ADDR in bits [60:51]
     word |= (data << 3); // DATA in bits [50:3]
     //lower 3 bits are 0
     return word;
@@ -39,7 +50,7 @@ uint64_t BF_Pack62(const bf_broadcast_frame_t *f)
 
 void BF_Pack34 (const bf_fastbeam_frame_t *f, uint8_t out[5])
 {
-    if(!out) return 0;
+    if(!out) return;
 
     uint64_t word = 0;
 
@@ -61,7 +72,7 @@ void BF_Pack34 (const bf_fastbeam_frame_t *f, uint8_t out[5])
     {
         out[i] = (uint8_t)((aligned >> (56 - i * 8)) & 0xFF); //  bit position 64-56 are put into out[0]...
 
-        uint8_t ctrl = ()
+        //uint8_t ctrl = ();
     }
    
 
@@ -72,7 +83,7 @@ void BF_Pack60_to4x15(const bf_register_frame_t *f, uint16_t out[4]) //MSB first
     if (!out)
         return;
 
-    uint64_t word = BF_Pack60(&f); //check
+    uint64_t word = BF_Pack60(f); //check
     out[0] = (uint16_t)(word >> 45) & 0x7FFF; //bits 59-45
     out[1] = (uint16_t)(word >> 30) & 0x7FFF; //bits 44-30
     out[2] = (uint16_t)(word >> 15) & 0x7FFF; //bits 29-15
@@ -155,7 +166,7 @@ HAL_StatusTypeDef BF_Send34_FastBeam(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_p
     uint8_t bytes[5] = {0}; //5 bytes = 40 bits
     BF_Pack34(f, bytes);
     HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_RESET); //CS low
-    HAL_SPI_Transmit(hspi, buf, 5, HAL_MAX_DELAY);      // sends 40 bits (overshoot!)
+    HAL_SPI_Transmit(hspi, bytes, 5, HAL_MAX_DELAY);      // sends 40 bits (overshoot!)
        return HAL_OK;
 }
 
@@ -166,20 +177,3 @@ HAL_StatusTypeDef BF_Send34_FastBeam(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_p
 
 
 
-
-
-    void pack_command(beamformer_command_cfg_t * config)
-    {
-        switch (config->command_type)
-        {
-        case COMMAND_SERIAL_RDWR:
-            return /* pack command serial rdwr here */
-    }
-}
-
-static void pack_command_serial_rdwr(beamformer_command_cfg_t * config) {
-    uint64_t command = 0;
-
-    command |= (config->parity << 58) | (config->reg_addr << 48);
-    command |= (config->buffered_write << 55) | (config->data);
-}

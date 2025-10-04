@@ -27,7 +27,7 @@
 SPI_HandleTypeDef hspi1;
 
 /* SPI1 init function */
-void MX_SPI1_Init(void)
+void MX_SPI1_Init(uint8_t dataSize)
 {
 
   /* USER CODE BEGIN SPI1_Init 0 */
@@ -42,7 +42,7 @@ void MX_SPI1_Init(void)
   hspi1.Instance = SPI1;
   hspi1.Init.Mode = SPI_MODE_MASTER;
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
-  hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  hspi1.Init.DataSize = dataSize; //custom spi word size
   hspi1.Init.CLKPolarity = SPI_POLARITY_LOW;
   hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
@@ -61,6 +61,7 @@ void MX_SPI1_Init(void)
   hspi1.Init.IOSwap = SPI_IO_SWAP_DISABLE;
   hspi1.Init.ReadyMasterManagement = SPI_RDY_MASTER_MANAGEMENT_INTERNALLY;
   hspi1.Init.ReadyPolarity = SPI_RDY_POLARITY_HIGH;
+  
   if (HAL_SPI_Init(&hspi1) != HAL_OK)
   {
     Error_Handler();

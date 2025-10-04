@@ -38,7 +38,7 @@ extern SPI_HandleTypeDef hspi1;
 
 /* USER CODE END Private defines */
 
-void MX_SPI1_Init(void);
+void MX_SPI1_Init(uint8_t dataSize);
 
 /* USER CODE BEGIN Prototypes */
 
