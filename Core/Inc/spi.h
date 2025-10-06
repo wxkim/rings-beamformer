@@ -50,3 +50,7 @@ void MX_SPI1_Init(uint8_t dataSize);
 
 #endif /* __SPI_H__ */
 
+
+
+
+

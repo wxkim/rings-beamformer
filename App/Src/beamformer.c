@@ -1,5 +1,4 @@
-#include "stm32u5xx_hal.h"
-#include "stm32u5xx_hal.h"
+#include "Drivers/STM32U5xx_HAL_Driver/Inc/stm32u5xx_hal.h"
 #include "stm32u5xx_hal_spi.h"
 #include "stm32u5xx_hal_gpio.h"
 #include "beamformer.h"
@@ -8,8 +7,16 @@
 
 #include <stdint.h>
 
-// Declare SPI handle
+extern SPI_HandleTypeDef hspi1;
 
+
+// SPI size setter function - call this before sending frames on SPI
+void SPI1_SetWordSize(uint32_t datasize) {
+    hspi1.Init.DataSize = datasize;
+    if (HAL_SPI_Init(&hspi1) != HAL_OK) {
+        Error_Handler();
+    }
+}
 
 //60-bit packer
 //hspi1.init.DataSize = SPI_DATASIZE_15BIT;
@@ -56,11 +63,11 @@ void BF_Pack34 (const bf_fastbeam_frame_t *f, uint8_t out[5])
 
     uint8_t opcode = (f->is_tx_bank) ? 0b1111 : 0b1110; //TX or RX bank
 
-    word |= ((uint64_t)(opcode << 30) & 0xC0000000); // opcode bits [33:30]
+    word |= ((uint64_t)opcode << 30);  // safe cast, no overflow - opcode bits [33:30]
     word |= ((uint64_t)(f->tdbs_addr_B & 0x3F) << 24); // TDBS B bits [29:24]
     word |= ((uint64_t)(f->tdbs_addr_A & 0x3F) << 18); // TDBS A bits [23:18]
     word |= ((uint64_t)(f->fbs_addr_B & 0x3FF) << 8); // FBS B bits [17:8]
-    word |= ((uint64_t)(f->fbs_addr_A & 0x3FF) << 0); // FBS A bits [7:0]
+    word |= ((uint64_t)(f->fbs_addr_A & 0xFF) << 0); // FBS A bits [7:0]
 
     //Align into MSB of 64 bit
 
@@ -100,6 +107,9 @@ void BF_Pack60_to4x15(const bf_register_frame_t *f, uint16_t out[4]) //MSB first
 //send one 60-bit register frame
 HAL_StatusTypeDef BF_Send60(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_register_frame_t *f)
 {
+  SPI1_SetWordSize(SPI_DATASIZE_15BIT);
+ //reinitialize spi for 15 bit word size
+      
     uint16_t chunks[4] = {0};
     BF_Pack60_to4x15(f, chunks);
 
@@ -117,11 +127,16 @@ HAL_StatusTypeDef BF_Send60(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint
     }
     HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET); //CS high
     return HAL_OK;
+
+    //deinit spi or reinit to 8 bit later if needed
 }
 
 //Send N-chained 60-bit register frames
-HAL_StatusTypeDef BF_Send60_Chain(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_register_frame_t *f, uint16_t N)
-{
+HAL_StatusTypeDef BF_Send60_Chain(SPI_HandleTypeDef *hspi,
+                                  GPIO_TypeDef *cs_port, uint16_t cs_pin,
+                                  const bf_register_frame_t *f, uint16_t N) {
+   SPI1_SetWordSize(SPI_DATASIZE_15BIT);
+//reinitialize spi for 15 bit word size
 HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_RESET); //CS low
 
 for(int frame = 0; frame < N; frame++)
@@ -147,6 +162,10 @@ return HAL_OK;
 //send one 62-bit broadcast frame
 HAL_StatusTypeDef BF_Send62_Broadcast(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_broadcast_frame_t *f)
 {
+
+  SPI1_SetWordSize(SPI_DATASIZE_8BIT);
+ // ensure 8-bit mode for 5-byte transmit
+
     uint64_t word = BF_Pack62(f);
     uint8_t bytes[8] = {0};
 
@@ -156,18 +175,29 @@ HAL_StatusTypeDef BF_Send62_Broadcast(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_
         bytes[i] = (uint8_t)((word >> (56 - i * 8)) & 0xFF);
     }
 
-    //idk how to send 62 bits -- review later
+    HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_RESET);
+HAL_StatusTypeDef status = HAL_SPI_Transmit(hspi, bytes, 8, HAL_MAX_DELAY); //sends 64 instead of 62 - figure out 62
+HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET);
+return status;
 
 }
 
 //send one 34-bit fast-beam frame
 HAL_StatusTypeDef BF_Send34_FastBeam(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin, const bf_fastbeam_frame_t *f)
 {
+   SPI1_SetWordSize(SPI_DATASIZE_8BIT);
+ // ensure 8-bit mode for 5-byte transmit
+
     uint8_t bytes[5] = {0}; //5 bytes = 40 bits
     BF_Pack34(f, bytes);
     HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_RESET); //CS low
-    HAL_SPI_Transmit(hspi, bytes, 5, HAL_MAX_DELAY);      // sends 40 bits (overshoot!)
-       return HAL_OK;
+    if (HAL_SPI_Transmit(hspi, bytes, 5, HAL_MAX_DELAY) != HAL_OK) // send 40 bits
+      {
+    HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET);
+    return HAL_ERROR;
+}
+HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET);
+return HAL_OK;
 }
 
 
