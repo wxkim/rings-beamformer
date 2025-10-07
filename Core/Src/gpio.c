@@ -37,7 +37,6 @@
      PC15-OSC32_OUT (PC15)   ------> RCC_OSC32_OUT
      PA13 (JTMS/SWDIO)   ------> DEBUG_JTMS-SWDIO
      PA14 (JTCK/SWCLK)   ------> DEBUG_JTCK-SWCLK
-     PB3 (JTDO/TRACESWO)   ------> DEBUG_JTDO-SWO
 */
 void MX_GPIO_Init(void)
 {

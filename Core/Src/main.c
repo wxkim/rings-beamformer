@@ -99,7 +99,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_ICACHE_Init();
-  MX_SPI1_Init();
+  MX_SPI3_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -125,6 +125,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  const uint8_t* messages = (const uint8_t*)"Hello, World";
+
   while (1) {
     /* USER CODE END WHILE */
 
@@ -132,7 +135,9 @@ int main(void)
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_7);
     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
     HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_2);
-    HAL_Delay(250);
+    
+    HAL_SPI_Transmit(&hspi3, messages, sizeof(messages), HAL_MAX_DELAY);
+    HAL_Delay(500);
   }
   /* USER CODE END 3 */
 }
