@@ -4,6 +4,9 @@ cmake_minimum_required(VERSION 3.22)
 set(CMAKE_PROJECT_NAME anoki)
 project(${CMAKE_PROJECT_NAME} C ASM)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+
 # Compiler settings
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
@@ -16,7 +19,7 @@ endif()
 # Create executable
 add_executable(${CMAKE_PROJECT_NAME})
 
-# Sources (add all your firmware sources here)
+# Sources 
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Application
     ${CMAKE_SOURCE_DIR}/App/Src/beamformer.c
@@ -64,7 +67,7 @@ target_compile_definitions(${CMAKE_PROJECT_NAME} PRIVATE
     USE_HAL_DRIVER
 )
 
-# CPU/FPU flags (very important for Cortex-M33)
+# CPU/FPU flags 
 target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
     -mcpu=cortex-m33
     -mthumb
@@ -77,9 +80,9 @@ target_link_options(${CMAKE_PROJECT_NAME} PRIVATE
     -mthumb
     -mfpu=fpv5-sp-d16
     -mfloat-abi=hard
-    -T${CMAKE_SOURCE_DIR}/STM32U575xx_FLASH.ld   # linker script
+    #-T${CMAKE_SOURCE_DIR}/STM32U575xx_FLASH.ld   # linker script
     -Wl,-Map=${CMAKE_PROJECT_NAME}.map
 )
 
-# Remove wrong libob.a if it sneaks in
+# Remove wrong libob.a 
 list(REMOVE_ITEM CMAKE_C_IMPLICIT_LINK_LIBRARIES ob)
