@@ -3,3 +3,7 @@
 //
 
 #include "usb-spi-control.h"
+
+void bf_spi_init(uint16_t data_size) {
+
+}
