@@ -126,7 +126,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  const uint8_t* messages = (const uint8_t*)"Hello, World";
+  const uint8_t messages[] = "Hello, World";
 
   while (1) {
     /* USER CODE END WHILE */
