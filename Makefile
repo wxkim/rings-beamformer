@@ -113,122 +113,60 @@ preinstall/fast:
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -P /Users/code/anoki/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named rings-beamformer
+# Target rules for targets named anoki
 
 # Build rule for target.
-rings-beamformer: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rings-beamformer
-.PHONY : rings-beamformer
+anoki: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 anoki
+.PHONY : anoki
 
 # fast build rule for target.
-rings-beamformer/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/build
-.PHONY : rings-beamformer/fast
+anoki/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/build
+.PHONY : anoki/fast
 
-#=============================================================================
-# Target rules for targets named STM32_Drivers
-
-# Build rule for target.
-STM32_Drivers: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 STM32_Drivers
-.PHONY : STM32_Drivers
-
-# fast build rule for target.
-STM32_Drivers/fast:
-	$(MAKE) $(MAKESILENT) -f cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/build.make cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/build
-.PHONY : STM32_Drivers/fast
-
-App/Src/awmf210.obj: App/Src/awmf210.c.obj
-.PHONY : App/Src/awmf210.obj
+App/Src/beamformer.o: App/Src/beamformer.c.o
+.PHONY : App/Src/beamformer.o
 
 # target to build an object file
-App/Src/awmf210.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/awmf210.c.obj
-.PHONY : App/Src/awmf210.c.obj
+App/Src/beamformer.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/App/Src/beamformer.c.o
+.PHONY : App/Src/beamformer.c.o
 
-App/Src/awmf210.i: App/Src/awmf210.c.i
-.PHONY : App/Src/awmf210.i
+App/Src/beamformer.i: App/Src/beamformer.c.i
+.PHONY : App/Src/beamformer.i
 
 # target to preprocess a source file
-App/Src/awmf210.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/awmf210.c.i
-.PHONY : App/Src/awmf210.c.i
+App/Src/beamformer.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/App/Src/beamformer.c.i
+.PHONY : App/Src/beamformer.c.i
 
-App/Src/awmf210.s: App/Src/awmf210.c.s
-.PHONY : App/Src/awmf210.s
-
-# target to generate assembly for a file
-App/Src/awmf210.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/awmf210.c.s
-.PHONY : App/Src/awmf210.c.s
-
-App/Src/laura.obj: App/Src/laura.c.obj
-.PHONY : App/Src/laura.obj
-
-# target to build an object file
-App/Src/laura.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/laura.c.obj
-.PHONY : App/Src/laura.c.obj
-
-App/Src/laura.i: App/Src/laura.c.i
-.PHONY : App/Src/laura.i
-
-# target to preprocess a source file
-App/Src/laura.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/laura.c.i
-.PHONY : App/Src/laura.c.i
-
-App/Src/laura.s: App/Src/laura.c.s
-.PHONY : App/Src/laura.s
+App/Src/beamformer.s: App/Src/beamformer.c.s
+.PHONY : App/Src/beamformer.s
 
 # target to generate assembly for a file
-App/Src/laura.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/laura.c.s
-.PHONY : App/Src/laura.c.s
+App/Src/beamformer.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/App/Src/beamformer.c.s
+.PHONY : App/Src/beamformer.c.s
 
-App/Src/soham.obj: App/Src/soham.c.obj
-.PHONY : App/Src/soham.obj
-
-# target to build an object file
-App/Src/soham.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/soham.c.obj
-.PHONY : App/Src/soham.c.obj
-
-App/Src/soham.i: App/Src/soham.c.i
-.PHONY : App/Src/soham.i
-
-# target to preprocess a source file
-App/Src/soham.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/soham.c.i
-.PHONY : App/Src/soham.c.i
-
-App/Src/soham.s: App/Src/soham.c.s
-.PHONY : App/Src/soham.s
-
-# target to generate assembly for a file
-App/Src/soham.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/soham.c.s
-.PHONY : App/Src/soham.c.s
-
-App/Src/usb-spi-control.obj: App/Src/usb-spi-control.c.obj
-.PHONY : App/Src/usb-spi-control.obj
+App/Src/usb-spi-control.o: App/Src/usb-spi-control.c.o
+.PHONY : App/Src/usb-spi-control.o
 
 # target to build an object file
-App/Src/usb-spi-control.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/usb-spi-control.c.obj
-.PHONY : App/Src/usb-spi-control.c.obj
+App/Src/usb-spi-control.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/App/Src/usb-spi-control.c.o
+.PHONY : App/Src/usb-spi-control.c.o
 
 App/Src/usb-spi-control.i: App/Src/usb-spi-control.c.i
 .PHONY : App/Src/usb-spi-control.i
 
 # target to preprocess a source file
 App/Src/usb-spi-control.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/usb-spi-control.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/App/Src/usb-spi-control.c.i
 .PHONY : App/Src/usb-spi-control.c.i
 
 App/Src/usb-spi-control.s: App/Src/usb-spi-control.c.s
@@ -236,23 +174,47 @@ App/Src/usb-spi-control.s: App/Src/usb-spi-control.c.s
 
 # target to generate assembly for a file
 App/Src/usb-spi-control.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/App/Src/usb-spi-control.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/App/Src/usb-spi-control.c.s
 .PHONY : App/Src/usb-spi-control.c.s
 
-Core/Src/main.obj: Core/Src/main.c.obj
-.PHONY : Core/Src/main.obj
+Core/Src/gpio.o: Core/Src/gpio.c.o
+.PHONY : Core/Src/gpio.o
 
 # target to build an object file
-Core/Src/main.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/main.c.obj
-.PHONY : Core/Src/main.c.obj
+Core/Src/gpio.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/gpio.c.o
+.PHONY : Core/Src/gpio.c.o
+
+Core/Src/gpio.i: Core/Src/gpio.c.i
+.PHONY : Core/Src/gpio.i
+
+# target to preprocess a source file
+Core/Src/gpio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/gpio.c.i
+.PHONY : Core/Src/gpio.c.i
+
+Core/Src/gpio.s: Core/Src/gpio.c.s
+.PHONY : Core/Src/gpio.s
+
+# target to generate assembly for a file
+Core/Src/gpio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/gpio.c.s
+.PHONY : Core/Src/gpio.c.s
+
+Core/Src/main.o: Core/Src/main.c.o
+.PHONY : Core/Src/main.o
+
+# target to build an object file
+Core/Src/main.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/main.c.o
+.PHONY : Core/Src/main.c.o
 
 Core/Src/main.i: Core/Src/main.c.i
 .PHONY : Core/Src/main.i
 
 # target to preprocess a source file
 Core/Src/main.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/main.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/main.c.i
 .PHONY : Core/Src/main.c.i
 
 Core/Src/main.s: Core/Src/main.c.s
@@ -260,23 +222,47 @@ Core/Src/main.s: Core/Src/main.c.s
 
 # target to generate assembly for a file
 Core/Src/main.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/main.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/main.c.s
 .PHONY : Core/Src/main.c.s
 
-Core/Src/stm32u5xx_hal_msp.obj: Core/Src/stm32u5xx_hal_msp.c.obj
-.PHONY : Core/Src/stm32u5xx_hal_msp.obj
+Core/Src/spi.o: Core/Src/spi.c.o
+.PHONY : Core/Src/spi.o
 
 # target to build an object file
-Core/Src/stm32u5xx_hal_msp.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/stm32u5xx_hal_msp.c.obj
-.PHONY : Core/Src/stm32u5xx_hal_msp.c.obj
+Core/Src/spi.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/spi.c.o
+.PHONY : Core/Src/spi.c.o
+
+Core/Src/spi.i: Core/Src/spi.c.i
+.PHONY : Core/Src/spi.i
+
+# target to preprocess a source file
+Core/Src/spi.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/spi.c.i
+.PHONY : Core/Src/spi.c.i
+
+Core/Src/spi.s: Core/Src/spi.c.s
+.PHONY : Core/Src/spi.s
+
+# target to generate assembly for a file
+Core/Src/spi.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/spi.c.s
+.PHONY : Core/Src/spi.c.s
+
+Core/Src/stm32u5xx_hal_msp.o: Core/Src/stm32u5xx_hal_msp.c.o
+.PHONY : Core/Src/stm32u5xx_hal_msp.o
+
+# target to build an object file
+Core/Src/stm32u5xx_hal_msp.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/stm32u5xx_hal_msp.c.o
+.PHONY : Core/Src/stm32u5xx_hal_msp.c.o
 
 Core/Src/stm32u5xx_hal_msp.i: Core/Src/stm32u5xx_hal_msp.c.i
 .PHONY : Core/Src/stm32u5xx_hal_msp.i
 
 # target to preprocess a source file
 Core/Src/stm32u5xx_hal_msp.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/stm32u5xx_hal_msp.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/stm32u5xx_hal_msp.c.i
 .PHONY : Core/Src/stm32u5xx_hal_msp.c.i
 
 Core/Src/stm32u5xx_hal_msp.s: Core/Src/stm32u5xx_hal_msp.c.s
@@ -284,23 +270,23 @@ Core/Src/stm32u5xx_hal_msp.s: Core/Src/stm32u5xx_hal_msp.c.s
 
 # target to generate assembly for a file
 Core/Src/stm32u5xx_hal_msp.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/stm32u5xx_hal_msp.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/stm32u5xx_hal_msp.c.s
 .PHONY : Core/Src/stm32u5xx_hal_msp.c.s
 
-Core/Src/stm32u5xx_it.obj: Core/Src/stm32u5xx_it.c.obj
-.PHONY : Core/Src/stm32u5xx_it.obj
+Core/Src/stm32u5xx_it.o: Core/Src/stm32u5xx_it.c.o
+.PHONY : Core/Src/stm32u5xx_it.o
 
 # target to build an object file
-Core/Src/stm32u5xx_it.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/stm32u5xx_it.c.obj
-.PHONY : Core/Src/stm32u5xx_it.c.obj
+Core/Src/stm32u5xx_it.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/stm32u5xx_it.c.o
+.PHONY : Core/Src/stm32u5xx_it.c.o
 
 Core/Src/stm32u5xx_it.i: Core/Src/stm32u5xx_it.c.i
 .PHONY : Core/Src/stm32u5xx_it.i
 
 # target to preprocess a source file
 Core/Src/stm32u5xx_it.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/stm32u5xx_it.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/stm32u5xx_it.c.i
 .PHONY : Core/Src/stm32u5xx_it.c.i
 
 Core/Src/stm32u5xx_it.s: Core/Src/stm32u5xx_it.c.s
@@ -308,23 +294,23 @@ Core/Src/stm32u5xx_it.s: Core/Src/stm32u5xx_it.c.s
 
 # target to generate assembly for a file
 Core/Src/stm32u5xx_it.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/stm32u5xx_it.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/stm32u5xx_it.c.s
 .PHONY : Core/Src/stm32u5xx_it.c.s
 
-Core/Src/syscalls.obj: Core/Src/syscalls.c.obj
-.PHONY : Core/Src/syscalls.obj
+Core/Src/syscalls.o: Core/Src/syscalls.c.o
+.PHONY : Core/Src/syscalls.o
 
 # target to build an object file
-Core/Src/syscalls.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/syscalls.c.obj
-.PHONY : Core/Src/syscalls.c.obj
+Core/Src/syscalls.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/syscalls.c.o
+.PHONY : Core/Src/syscalls.c.o
 
 Core/Src/syscalls.i: Core/Src/syscalls.c.i
 .PHONY : Core/Src/syscalls.i
 
 # target to preprocess a source file
 Core/Src/syscalls.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/syscalls.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/syscalls.c.i
 .PHONY : Core/Src/syscalls.c.i
 
 Core/Src/syscalls.s: Core/Src/syscalls.c.s
@@ -332,23 +318,23 @@ Core/Src/syscalls.s: Core/Src/syscalls.c.s
 
 # target to generate assembly for a file
 Core/Src/syscalls.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/syscalls.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/syscalls.c.s
 .PHONY : Core/Src/syscalls.c.s
 
-Core/Src/sysmem.obj: Core/Src/sysmem.c.obj
-.PHONY : Core/Src/sysmem.obj
+Core/Src/sysmem.o: Core/Src/sysmem.c.o
+.PHONY : Core/Src/sysmem.o
 
 # target to build an object file
-Core/Src/sysmem.c.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/sysmem.c.obj
-.PHONY : Core/Src/sysmem.c.obj
+Core/Src/sysmem.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/sysmem.c.o
+.PHONY : Core/Src/sysmem.c.o
 
 Core/Src/sysmem.i: Core/Src/sysmem.c.i
 .PHONY : Core/Src/sysmem.i
 
 # target to preprocess a source file
 Core/Src/sysmem.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/sysmem.c.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/sysmem.c.i
 .PHONY : Core/Src/sysmem.c.i
 
 Core/Src/sysmem.s: Core/Src/sysmem.c.s
@@ -356,16 +342,304 @@ Core/Src/sysmem.s: Core/Src/sysmem.c.s
 
 # target to generate assembly for a file
 Core/Src/sysmem.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/Core/Src/sysmem.c.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/sysmem.c.s
 .PHONY : Core/Src/sysmem.c.s
 
-startup_stm32u575xx.obj: startup_stm32u575xx.s.obj
-.PHONY : startup_stm32u575xx.obj
+Core/Src/system_stm32u5xx.o: Core/Src/system_stm32u5xx.c.o
+.PHONY : Core/Src/system_stm32u5xx.o
 
 # target to build an object file
-startup_stm32u575xx.s.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rings-beamformer.dir/build.make CMakeFiles/rings-beamformer.dir/startup_stm32u575xx.s.obj
-.PHONY : startup_stm32u575xx.s.obj
+Core/Src/system_stm32u5xx.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/system_stm32u5xx.c.o
+.PHONY : Core/Src/system_stm32u5xx.c.o
+
+Core/Src/system_stm32u5xx.i: Core/Src/system_stm32u5xx.c.i
+.PHONY : Core/Src/system_stm32u5xx.i
+
+# target to preprocess a source file
+Core/Src/system_stm32u5xx.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/system_stm32u5xx.c.i
+.PHONY : Core/Src/system_stm32u5xx.c.i
+
+Core/Src/system_stm32u5xx.s: Core/Src/system_stm32u5xx.c.s
+.PHONY : Core/Src/system_stm32u5xx.s
+
+# target to generate assembly for a file
+Core/Src/system_stm32u5xx.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Core/Src/system_stm32u5xx.c.s
+.PHONY : Core/Src/system_stm32u5xx.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.c.s
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.o: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.o
+
+# target to build an object file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.o
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.o
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.i: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.i
+
+# target to preprocess a source file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.i
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.i
+
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.s: Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.s
+
+# target to generate assembly for a file
+Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.s
+.PHONY : Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.c.s
+
+startup_stm32u575xx.o: startup_stm32u575xx.s.o
+.PHONY : startup_stm32u575xx.o
+
+# target to build an object file
+startup_stm32u575xx.s.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/anoki.dir/build.make CMakeFiles/anoki.dir/startup_stm32u575xx.s.o
+.PHONY : startup_stm32u575xx.s.o
 
 # Help Target
 help:
@@ -375,36 +649,71 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... STM32_Drivers"
-	@echo "... rings-beamformer"
-	@echo "... App/Src/awmf210.obj"
-	@echo "... App/Src/awmf210.i"
-	@echo "... App/Src/awmf210.s"
-	@echo "... App/Src/laura.obj"
-	@echo "... App/Src/laura.i"
-	@echo "... App/Src/laura.s"
-	@echo "... App/Src/soham.obj"
-	@echo "... App/Src/soham.i"
-	@echo "... App/Src/soham.s"
-	@echo "... App/Src/usb-spi-control.obj"
+	@echo "... anoki"
+	@echo "... App/Src/beamformer.o"
+	@echo "... App/Src/beamformer.i"
+	@echo "... App/Src/beamformer.s"
+	@echo "... App/Src/usb-spi-control.o"
 	@echo "... App/Src/usb-spi-control.i"
 	@echo "... App/Src/usb-spi-control.s"
-	@echo "... Core/Src/main.obj"
+	@echo "... Core/Src/gpio.o"
+	@echo "... Core/Src/gpio.i"
+	@echo "... Core/Src/gpio.s"
+	@echo "... Core/Src/main.o"
 	@echo "... Core/Src/main.i"
 	@echo "... Core/Src/main.s"
-	@echo "... Core/Src/stm32u5xx_hal_msp.obj"
+	@echo "... Core/Src/spi.o"
+	@echo "... Core/Src/spi.i"
+	@echo "... Core/Src/spi.s"
+	@echo "... Core/Src/stm32u5xx_hal_msp.o"
 	@echo "... Core/Src/stm32u5xx_hal_msp.i"
 	@echo "... Core/Src/stm32u5xx_hal_msp.s"
-	@echo "... Core/Src/stm32u5xx_it.obj"
+	@echo "... Core/Src/stm32u5xx_it.o"
 	@echo "... Core/Src/stm32u5xx_it.i"
 	@echo "... Core/Src/stm32u5xx_it.s"
-	@echo "... Core/Src/syscalls.obj"
+	@echo "... Core/Src/syscalls.o"
 	@echo "... Core/Src/syscalls.i"
 	@echo "... Core/Src/syscalls.s"
-	@echo "... Core/Src/sysmem.obj"
+	@echo "... Core/Src/sysmem.o"
 	@echo "... Core/Src/sysmem.i"
 	@echo "... Core/Src/sysmem.s"
-	@echo "... startup_stm32u575xx.obj"
+	@echo "... Core/Src/system_stm32u5xx.o"
+	@echo "... Core/Src/system_stm32u5xx.i"
+	@echo "... Core/Src/system_stm32u5xx.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_cortex.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_dma_ex.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_gpio.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_pwr_ex.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_rcc_ex.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi.s"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.o"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.i"
+	@echo "... Drivers/STM32U5xx_HAL_Driver/Src/stm32u5xx_hal_spi_ex.s"
+	@echo "... startup_stm32u575xx.o"
 .PHONY : help
 
 
@@ -416,7 +725,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -P /Users/code/anoki/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

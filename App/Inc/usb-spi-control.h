@@ -10,4 +10,6 @@
 #include "spi.h"
 // #include "usb_device.h"
 
+void bf_spi_init(uint16_t data_size);
+
 #endif // USB_SPI_CONTROL_H

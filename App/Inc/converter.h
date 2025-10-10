@@ -1,7 +1,7 @@
 #ifndef AWMF210_H
 #define AWMF210_H
 
-#include "core_cm33.h"
+// #include "core_cm33.h"
 #include "main.h"
 #include "spi.h"
 #include "stdio.h"
