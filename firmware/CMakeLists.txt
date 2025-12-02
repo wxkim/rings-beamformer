@@ -1,10 +1,14 @@
 cmake_minimum_required(VERSION 3.22)
 
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/gcc-arm-none-eabi.cmake)
+
 # Project setup
 set(CMAKE_PROJECT_NAME anoki)
 project(${CMAKE_PROJECT_NAME} C ASM)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+
 
 # Compiler settings
 set(CMAKE_C_STANDARD 11)
