@@ -11,6 +11,10 @@
 
 // #include "usb_device.h"
 
+// start a initalization sequence
+void BF_Init(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin);
+
+
 // add code later for initializing-deinitalizing spi protocol with custom word
 // sizes for command
 void SPI1_SetWordSize(uint32_t datasize);
