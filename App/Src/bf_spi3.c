@@ -1,16 +1,24 @@
 #include "bf_spi3.h"
 
+extern SPI_HandleTypeDef hspi3;
+
 // SPI3 pin map from CubeMX:
 // SCK  = PB3 (AF6)
 // MOSI = PB5 (AF6) — routed to beamformer SDI/PDI (pins OR’ed on ASIC)
 // NSS  = PA4  (unused here; CS is manual via passed-in GPIO)
 
 // Small delay helper to keep SCK high/low long enough for the ASIC.
-static inline void BF_SPI3_BitDelay(void) { __NOP(); }
+// Tunable if logic analyzer shows marginal setup/hold; keep it deterministic.
+static inline void BF_SPI3_BitDelay(void) {
+  volatile uint32_t pad = 32;
+  while (pad--) {
+    __NOP();
+  }
+}
 
 static void BF_SPI3_ConfigPinsGPIO(void) {
   // Disable SPI3 peripheral so pins can be driven as GPIO.
-  __HAL_RCC_SPI3_CLK_DISABLE();
+  HAL_SPI_DeInit(&hspi3);
 
   GPIO_InitTypeDef init = {0};
   init.Mode = GPIO_MODE_OUTPUT_PP;
@@ -28,7 +36,7 @@ static void BF_SPI3_ConfigPinsGPIO(void) {
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
 }
 
-void BF_SPI3_BitBangInit(void) { BF_SPI3_ConfigPinsGPIO(); }
+void BF_SPI3_BitBangInit(void) { static uint8_t configured = 0; if (!configured) { BF_SPI3_ConfigPinsGPIO(); configured = 1; } }
 
 static void BF_SPI3_ClockBit(GPIO_PinState mosi_state) {
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, mosi_state);
@@ -63,6 +71,9 @@ HAL_StatusTypeDef BF_SPI3_SendBits(GPIO_TypeDef *cs_port, uint16_t cs_pin,
   HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_RESET);
 
   BF_SPI3_ShiftBits(word, bit_count);
+
+  // Idle MOSI low after transfer to avoid spurious highs while CS is released.
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
 
   HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET);
   return HAL_OK;

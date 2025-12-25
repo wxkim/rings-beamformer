@@ -21,7 +21,8 @@ void BF_SPI3_BitBangInit(void);
 void BF_SPI3_ShiftBits(uint64_t word, uint8_t bit_count);
 
 // Shift an arbitrary bit-count (<=64) MSB-first on the MOSI line while
-// manually clocking SCK. CS is held low for the whole transfer.
+// manually clocking SCK. CS is held low for the whole transfer. For broadcast
+// use, ensure the MOSI line is wired to the ASIC PDI and SDI is held low.
 HAL_StatusTypeDef BF_SPI3_SendBits(GPIO_TypeDef *cs_port, uint16_t cs_pin,
                                    uint64_t word, uint8_t bit_count);
 

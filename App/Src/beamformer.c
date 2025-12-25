@@ -12,7 +12,8 @@ extern SPI_HandleTypeDef hspi3;
 
 uint64_t BF_Pack60(const bf_register_frame_t *f) {
 
-  // Serial writes per Anokiwave spec: leading bits are always 00.
+  // Serial writes per Anokiwave spec: leading bits are always 00 (broadcast is a
+  // separate 62-bit format).
   uint8_t ctrl = 0b00;
   uint64_t addr = (uint64_t)(f->addr10 & 0x03FFu);           // 10 bits
   uint64_t data = (uint64_t)(f->data48 & 0xFFFFFFFFFFFFull); // 48 bits
