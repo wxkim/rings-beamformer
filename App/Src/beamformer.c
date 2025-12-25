@@ -4,7 +4,6 @@
 #include "stm32u5xx_hal_gpio.h"
 #include "stm32u5xx_hal_spi.h"
 #include "bf_spi3.h"
-
 #include <stdint.h>
 
 extern SPI_HandleTypeDef hspi3;
@@ -13,9 +12,8 @@ extern SPI_HandleTypeDef hspi3;
 
 uint64_t BF_Pack60(const bf_register_frame_t *f) {
 
-  uint8_t ctrl = (f->cmd == BF_CMD_BROADCAST_WR)
-                     ? 0b10
-                     : 0b00; // 00 = reg write, 10 = broadcast write
+  // Serial writes per Anokiwave spec: leading bits are always 00.
+  uint8_t ctrl = 0b00;
   uint64_t addr = (uint64_t)(f->addr10 & 0x03FFu);           // 10 bits
   uint64_t data = (uint64_t)(f->data48 & 0xFFFFFFFFFFFFull); // 48 bits
 
@@ -27,7 +25,6 @@ uint64_t BF_Pack60(const bf_register_frame_t *f) {
 }
 
 uint64_t BF_Pack62(const bf_broadcast_frame_t *f) {
-  uint8_t ctrl = 0b10;                                       // broadcast write
   uint64_t addr = (uint64_t)(f->addr10 & 0x03FFu);           // 10 bits
   uint64_t data = (uint64_t)(f->data48 & 0xFFFFFFFFFFFFull); // 48 bits
 
@@ -121,14 +118,8 @@ void BF_Pack60_to2x30(const bf_register_frame_t *f, uint32_t out[2]) {
 HAL_StatusTypeDef BF_Send60(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port,
                             uint16_t cs_pin, const bf_register_frame_t *f) {
   (void)hspi; // kept for API compatibility
-  // 60-bit packet -> 2 frames of 30 bits each.
-  if (BF_SPI3_ReInitForBits(60) != HAL_OK) {
-    return HAL_ERROR;
-  }
-
-  uint32_t chunks[2] = {0};
-  BF_Pack60_to2x30(f, chunks);
-  return BF_SPI3_Send2Words(cs_port, cs_pin, chunks);
+  uint64_t word = BF_Pack60(f);
+  return BF_SPI3_SendBits(cs_port, cs_pin, word, 60);
 }
 
 // Send N-chained 60-bit register frames
@@ -136,22 +127,13 @@ HAL_StatusTypeDef BF_Send60_Chain(SPI_HandleTypeDef *hspi,
                                   GPIO_TypeDef *cs_port, uint16_t cs_pin,
                                   const bf_register_frame_t *f, uint16_t N) {
   (void)hspi; // kept for API compatibility
-  // 60-bit packets, chained back-to-back.
-  if (BF_SPI3_ReInitForBits(60) != HAL_OK) {
-    return HAL_ERROR;
-  }
+  BF_SPI3_BitBangInit();
 
-  HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_RESET); // CS low
+  HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_RESET); // CS low for whole chain
 
   for (int frame = 0; frame < N; frame++) {
-    uint32_t chunks[2] = {0};
-    BF_Pack60_to2x30(&f[frame], chunks);
-
-    if (HAL_SPI_Transmit(&hspi3, (uint8_t *)chunks, 2, HAL_MAX_DELAY) !=
-        HAL_OK) {
-      HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET);
-      return HAL_ERROR;
-    }
+    uint64_t word = BF_Pack60(&f[frame]);
+    BF_SPI3_ShiftBits(word, 60);
   }
 
   HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET);
@@ -164,14 +146,8 @@ HAL_StatusTypeDef BF_Send62_Broadcast(SPI_HandleTypeDef *hspi,
                                       const bf_broadcast_frame_t *f) {
 
   (void)hspi; // kept for API compatibility
-  // 62-bit broadcast -> 2 frames of 31 bits each.
-  if (BF_SPI3_ReInitForBits(62) != HAL_OK) {
-    return HAL_ERROR;
-  }
-
-  uint32_t chunks[2] = {0};
-  BF_Pack62_to2x31(f, chunks);
-  return BF_SPI3_Send2Words(cs_port, cs_pin, chunks);
+  uint64_t word = BF_Pack62(f);
+  return BF_SPI3_SendBits(cs_port, cs_pin, word, 62);
 }
 
 // send one 34-bit fast-beam frame
@@ -179,12 +155,15 @@ HAL_StatusTypeDef BF_Send34_FastBeam(SPI_HandleTypeDef *hspi,
                                      GPIO_TypeDef *cs_port, uint16_t cs_pin,
                                      const bf_fastbeam_frame_t *f) {
   (void)hspi; // kept for API compatibility
-  // 34-bit fast-beam steer -> 2 frames of 17 bits.
-  if (BF_SPI3_ReInitForBits(34) != HAL_OK) {
-    return HAL_ERROR;
-  }
+  uint64_t word = 0;
+  uint8_t opcode = (f->is_tx_bank) ? 0b1111 : 0b1110; // TX or RX bank
 
-  uint32_t chunks[2] = {0};
-  BF_Pack34_to2x17(f, chunks);
-  return BF_SPI3_Send2Words(cs_port, cs_pin, chunks);
+  word |= ((uint64_t)opcode << 30);
+  word |= ((uint64_t)(f->tdbs_addr_B & 0x3F) << 24);
+  word |= ((uint64_t)(f->tdbs_addr_A & 0x3F) << 18);
+  word |= ((uint64_t)(f->fbs_addr_B & 0x1FF) << 9);
+  word |= ((uint64_t)(f->fbs_addr_A & 0x1FF) << 0);
+
+  // Send exactly 34 bits, MSB first.
+  return BF_SPI3_SendBits(cs_port, cs_pin, word, 34);
 }
