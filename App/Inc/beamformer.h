@@ -14,12 +14,6 @@
 // start a initalization sequence
 void BF_Init(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin);
 
-
-// add code later for initializing-deinitalizing spi protocol with custom word
-// sizes for command
-void SPI1_SetWordSize(uint32_t datasize);
-extern SPI_HandleTypeDef hspi1;
-
 // We declare explicit command codes matching a packer
 typedef enum
 {
@@ -52,18 +46,25 @@ typedef struct{
 } bf_fastbeam_frame_t;
 
 // build 60-bit register frame from uint_64
-
-void BF_Pack60(const bf_register_frame_t *f);
+uint64_t BF_Pack60(const bf_register_frame_t *f);
 
 // split 60-bit into 4x15 word chunks
 void BF_Pack60_to4x15(const bf_register_frame_t *f, uint16_t out[4]);
 
-     // build 62-bit broadcast frame from uint_64
-void BF_Pack62(const bf_broadcast_frame_t *f);
+// split 60-bit into 2x30-bit words
+void BF_Pack60_to2x30(const bf_register_frame_t *f, uint32_t out[2]);
+
+// build 62-bit broadcast frame from uint_64
+uint64_t BF_Pack62(const bf_broadcast_frame_t *f);
+
+// split 62-bit into 2x31-bit words
+void BF_Pack62_to2x31(const bf_broadcast_frame_t *f, uint32_t out[2]);
 
 // split 34-bit into 4x15 word chunks
 void BF_Pack34 (const bf_fastbeam_frame_t *f, uint8_t out[5]);
 
+// split 34-bit into 2x17-bit words
+void BF_Pack34_to2x17(const bf_fastbeam_frame_t *f, uint32_t out[2]);
 
 //Transmit into register
 
