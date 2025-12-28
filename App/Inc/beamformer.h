@@ -3,7 +3,6 @@
 
 #include "gpio.h"
 #include "main.h"
-#include "spi.h"
 #include "stm32u5xx_hal.h"
 #include "stm32u5xx_hal_def.h"
 #include "stm32u5xx_hal_spi.h"
@@ -12,7 +11,7 @@
 // #include "usb_device.h"
 
 // start a initalization sequence
-void BF_Init(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port, uint16_t cs_pin);
+void BF_Init(GPIO_TypeDef *cs_port, uint16_t cs_pin);
 
 // We declare explicit command codes matching a packer
 typedef enum
@@ -71,22 +70,19 @@ void BF_Pack34_to2x17(const bf_fastbeam_frame_t *f, uint32_t out[2]);
 // Transmit into register
 
 // send one 60-bit register frame
-HAL_StatusTypeDef BF_Send60(SPI_HandleTypeDef *hspi, GPIO_TypeDef *cs_port,
-                            uint16_t cs_pin, const bf_register_frame_t *f);
+HAL_StatusTypeDef BF_Send60(GPIO_TypeDef *cs_port, uint16_t cs_pin,
+                            const bf_register_frame_t *f);
 
 // send one 62-bit broadcast frame
-HAL_StatusTypeDef BF_Send62_Broadcast(SPI_HandleTypeDef *hspi,
-                                      GPIO_TypeDef *cs_port, uint16_t cs_pin,
+HAL_StatusTypeDef BF_Send62_Broadcast(GPIO_TypeDef *cs_port, uint16_t cs_pin,
                                       const bf_broadcast_frame_t *f);
 
 // Send N-chained 60-bit register frames
-HAL_StatusTypeDef BF_Send60_Chain(SPI_HandleTypeDef *hspi,
-                                  GPIO_TypeDef *cs_port, uint16_t cs_pin,
+HAL_StatusTypeDef BF_Send60_Chain(GPIO_TypeDef *cs_port, uint16_t cs_pin,
                                   const bf_register_frame_t *f, uint16_t N);
 
 // send one 34-bit fast-beam frame
-HAL_StatusTypeDef BF_Send34_FastBeam(SPI_HandleTypeDef *hspi,
-                                     GPIO_TypeDef *cs_port, uint16_t cs_pin,
+HAL_StatusTypeDef BF_Send34_FastBeam(GPIO_TypeDef *cs_port, uint16_t cs_pin,
                                      const bf_fastbeam_frame_t *f);
 
 #endif // BEAMFORMER_H
