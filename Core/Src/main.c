@@ -59,6 +59,8 @@ void SystemClock_Config(void);
 static void SystemPower_Config(void);
 /* USER CODE BEGIN PFP */
 
+void App_BeamformerDemo(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -99,8 +101,10 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_ICACHE_Init();
-  MX_SPI3_Init();
+  MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
+
+  App_BeamformerDemo();
 
   /* USER CODE END 2 */
 
@@ -126,8 +130,6 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  const uint8_t messages[] = "Hello, World";
-
   while (1) {
     /* USER CODE END WHILE */
 
@@ -135,8 +137,7 @@ int main(void)
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_7);
     HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_7);
     HAL_GPIO_TogglePin(GPIOG, GPIO_PIN_2);
-    
-    HAL_SPI_Transmit(&hspi3, messages, sizeof(messages), HAL_MAX_DELAY);
+
     HAL_Delay(500);
   }
   /* USER CODE END 3 */

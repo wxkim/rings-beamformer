@@ -24,6 +24,11 @@ file(GLOB_RECURSE APP_SOURCES
     ${CMAKE_SOURCE_DIR}/Drivers/BSP/STM32U5xx_Nucleo/*.c
 )
 
+# Legacy glue (no longer used/required).
+list(REMOVE_ITEM APP_SOURCES
+    ${CMAKE_SOURCE_DIR}/App/Src/bf_port.c
+)
+
 set(STARTUP_FILE ${CMAKE_SOURCE_DIR}/startup_stm32u575xx.s)
 
 # Create the executable target

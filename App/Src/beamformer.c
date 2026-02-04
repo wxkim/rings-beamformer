@@ -138,7 +138,7 @@ HAL_StatusTypeDef BF_Send60_Chain(GPIO_TypeDef *cs_port, uint16_t cs_pin,
     uint32_t chunks[2] = {0};
     BF_Pack60_to2x30(&f[frame], chunks);
 
-    status = HAL_SPI_Transmit(BF_SPI_HANDLE, (uint8_t *)chunks, 2, HAL_MAX_DELAY);
+    status = BF_SPI_Tx2Words_NoCS(chunks);
     if (status != HAL_OK) {
       break;
     }

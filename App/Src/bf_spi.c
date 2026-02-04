@@ -1,5 +1,4 @@
 #include "bf_spi.h"
-#include "gpio.h"
 
 // Map total bit counts to the required datasize setting.
 static uint32_t BF_SPI_DatasizeForBits(uint16_t total_bits) {
@@ -53,8 +52,9 @@ HAL_StatusTypeDef BF_SPI_ReInitForBits(uint16_t total_bits) {
 }
 
 void BF_SPI_DeInit(void) {
-  if (BF_SPI_HANDLE != NULL) {
-    HAL_SPI_DeInit(BF_SPI_HANDLE);
+  SPI_HandleTypeDef *hspi = BF_SPI_HANDLE;
+  if (hspi != NULL && hspi->Instance != NULL) {
+    HAL_SPI_DeInit(hspi);
   }
 }
 
@@ -74,4 +74,17 @@ HAL_StatusTypeDef BF_SPI_Send2Words(GPIO_TypeDef *cs_port, uint16_t cs_pin,
       HAL_SPI_Transmit(hspi, (uint8_t *)words, 2, HAL_MAX_DELAY);
   HAL_GPIO_WritePin(cs_port, cs_pin, GPIO_PIN_SET);
   return status;
+}
+
+HAL_StatusTypeDef BF_SPI_Tx2Words_NoCS(const uint32_t words[2]) {
+  if (words == NULL) {
+    return HAL_ERROR;
+  }
+
+  SPI_HandleTypeDef *hspi = BF_SPI_HANDLE;
+  if (hspi == NULL || hspi->Instance == NULL) {
+    return HAL_ERROR;
+  }
+
+  return HAL_SPI_Transmit(hspi, (uint8_t *)words, 2, HAL_MAX_DELAY);
 }
