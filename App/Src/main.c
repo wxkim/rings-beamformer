@@ -10,7 +10,6 @@
 #define BF_CS_PIN  GPIO_PIN_4
 
 void App_BeamformerDemo(void) {
-  BF_Init(BF_CS_PORT, BF_CS_PIN); // CS idle high
 
   bf_register_frame_t reg = {
       .addr10 = AWMF_REG_MODE,
